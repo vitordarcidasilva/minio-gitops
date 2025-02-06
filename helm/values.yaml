@@ -1,10 +1,11 @@
+# helm/values.yaml
 mode: standalone
 rootUser: "minio"
 rootPassword: "minio123"
 
 persistence:
   enabled: true
-  size: 10Gi
+  size: 1Gi
 
 ingress:
   enabled: true
@@ -19,8 +20,18 @@ ingress:
 
 resources:
   requests:
-    memory: 512Mi
-    cpu: 250m
+    memory: 256Mi
+    cpu: 100m
+
+replicas: 1
 
 service:
   type: ClusterIP
+
+console:
+  enabled: true
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - minio-console.local
