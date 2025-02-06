@@ -1,18 +1,26 @@
-# values.yaml
 mode: standalone
 rootUser: "minio"
 rootPassword: "minio123"
 
 persistence:
+  enabled: true
   size: 10Gi
-
-resources:
-  requests:
-    memory: 512Mi
 
 ingress:
   enabled: true
   ingressClassName: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
   hosts:
-    - minio.robertsilvatech.local
-  path: /
+    - host: minio.local
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources:
+  requests:
+    memory: 512Mi
+    cpu: 250m
+
+service:
+  type: ClusterIP
