@@ -1,1 +1,18 @@
+# values.yaml
+mode: standalone
+rootUser: "minio"
+rootPassword: "minio123"
 
+persistence:
+  size: 10Gi
+
+resources:
+  requests:
+    memory: 512Mi
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hosts:
+    - minio.robertsilvatech.local
+  path: /
